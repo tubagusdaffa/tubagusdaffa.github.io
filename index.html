@@ -3,748 +3,605 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Portofolio Tubagus Daffa Nabil Dhaifullah - Lulusan Ilmu Komputer dan pengembang aplikasi.">
+<meta name="description" content="Portofolio Tubagus Daffa Nabil Dhaifullah - Sarjana Teknik Informatika, pengembang web, mobile, dan game.">
+<meta name="theme-color" content="#f3efe6">
 <title>Tubagus Daffa | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --bg: #080e1b;
-  --surface: #101b2e;
-  --surface2: #14223a;
-  --blue: #60a5fa;
-  --text: #edf3ff;
-  --muted: #9aaac1;
-  --border: #263750;
+  --paper: #f3efe6;
+  --paper-2: #ebe6d9;
+  --ink: #1b1a17;
+  --muted: #6d6a61;
+  --line: #d3ccbb;
+  --accent: #8a3b24;
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans: "Inter", "Segoe UI", system-ui, sans-serif;
+  --wrap: min(1240px, 90%);
+  --edge: max(5vw, calc((100vw - 1240px) / 2));
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-}
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.7;
+  font-family: var(--sans); background: var(--paper); color: var(--ink);
+  line-height: 1.7; font-size: 16px; -webkit-font-smoothing: antialiased; overflow-x: hidden;
 }
-
-a {
-  text-decoration: none;
-  color: inherit;
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .5;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .1  0 0 0 0 .1  0 0 0 0 .08  0 0 0 .05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { font-family: inherit; }
+::selection { background: var(--accent); color: var(--paper); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+main, footer { position: relative; z-index: 1; }
+.wrap { width: var(--wrap); margin: 0 auto; }
 
-.container {
-  width: min(1100px, 88%);
-  margin: auto;
+.dark { background: var(--ink); color: var(--paper); --line: #3a3832; --muted: #a8a397; --accent: #e08a62; }
+
+/* ---------- Navigasi ---------- */
+.top {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 350; display: flex; justify-content: space-between; align-items: center;
+  padding: 22px 4vw; color: #fff; mix-blend-mode: difference;
 }
-
-nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(8,14,27,.94);
-  backdrop-filter: blur(15px);
-  border-bottom: 1px solid var(--border);
+.logo { font-family: var(--serif); font-size: 22px; font-weight: 500; letter-spacing: -.02em; }
+.top nav { display: flex; gap: 30px; align-items: center; }
+.top nav a, .clock, .menu-btn {
+  font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 500;
 }
-
-.nav-content {
-  min-height: 75px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+.top nav a { position: relative; padding: 4px 0; }
+.top nav a::after { content: ""; position: absolute; left: 0; bottom: 0; height: 1px; width: 100%; background: #fff; transform: scaleX(0); transform-origin: right; transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+.top nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+.clock { opacity: .75; }
+.menu-btn { display: none; background: none; border: 0; color: #fff; cursor: pointer; }
+.sheet {
+  position: fixed; inset: 0; z-index: 340; background: var(--ink); color: var(--paper); display: flex; flex-direction: column; justify-content: center;
+  padding: 0 8vw; gap: 4px; opacity: 0; visibility: hidden; transition: opacity .3s, visibility .3s;
 }
+.sheet.open { opacity: 1; visibility: visible; }
+.sheet a { font-family: var(--serif); font-size: clamp(38px, 11vw, 64px); line-height: 1.2; font-weight: 300; }
+.sheet a i { font-style: normal; font-family: var(--sans); font-size: 12px; letter-spacing: .16em; color: #a8a397; margin-right: 14px; vertical-align: middle; }
 
-.logo {
-  font-size: 23px;
-  font-weight: 800;
+/* ---------- Hero ---------- */
+.hero { position: relative; min-height: 100svh; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 110px 0 64px; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 56px; align-items: end; }
+.hero-text { display: flex; flex-direction: column; min-width: 0; }
+.hero-tag { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 26px; display: flex; gap: 18px; align-items: center; }
+.hero-tag::after { content: ""; width: 70px; height: 1px; background: var(--accent); }
+h1.name { font-family: var(--serif); font-weight: 300; letter-spacing: -.045em; }
+.mask { display: block; overflow: hidden; padding-bottom: .14em; margin-bottom: -.14em; }
+.mask > span { display: block; opacity: 0; animation: rise .8s ease forwards; animation-delay: var(--d, 0s); }
+.name .l1 { font-size: clamp(44px, 8.4vw, 120px); line-height: .95; }
+.name .l2 { font-size: clamp(28px, 5.4vw, 80px); line-height: 1.05; font-style: italic; font-weight: 300; color: var(--accent); letter-spacing: -.035em; }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.fade { opacity: 0; animation: rise .7s ease forwards; animation-delay: var(--d, 0s); }
+
+.hero-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-top: 40px; padding-top: 26px; border-top: 1px solid var(--line); }
+.hero-bottom p { max-width: 470px; color: var(--muted); font-size: 17px; }
+.hero-bottom p strong { color: var(--ink); font-weight: 500; }
+.scroll-cue { position: absolute; left: 50%; bottom: 14px; }
+
+/* ---------- Foto ---------- */
+.portrait { position: relative; width: clamp(220px, 23.5vw, 330px); aspect-ratio: 4 / 5; margin: 0 14px 14px 0; }
+.portrait::before { content: ""; position: absolute; inset: 0; border: 1px solid var(--ink); transform: translate(14px, 14px); }
+.portrait img { position: relative; display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%; background: var(--paper-2); }
+
+/* ---------- Umum section ---------- */
+section { position: relative; padding: 120px 0; }
+.label { display: flex; align-items: center; gap: 16px; margin-bottom: 48px; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+.label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.js .reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; transition-delay: var(--d, 0s); }
+.js .reveal.in { opacity: 1; transform: none; }
+
+/* ---------- Tentang ---------- */
+.statement { font-family: var(--serif); font-weight: 400; font-size: clamp(21px, 2.4vw, 28px); line-height: 1.45; letter-spacing: -.01em; max-width: 760px; }
+.statement em { font-style: italic; color: var(--accent); }
+.about-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 90px; margin-top: 48px; }
+.about-grid p { color: var(--muted); margin-bottom: 18px; max-width: 560px; font-size: 17px; }
+.about-grid p strong { color: var(--ink); font-weight: 500; }
+.info div { display: grid; grid-template-columns: 130px 1fr; gap: 16px; padding: 14px 0; border-top: 1px solid var(--line); }
+.info div:last-child { border-bottom: 1px solid var(--line); }
+.info small { font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+.info b { font-weight: 500; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 90px; border-top: 1px solid var(--ink); }
+.stat { padding: 26px 20px 0 0; }
+.stat + .stat { padding-left: 22px; border-left: 1px solid var(--line); }
+.stat b { display: block; font-family: var(--serif); font-weight: 300; font-size: clamp(48px, 7vw, 100px); line-height: 1; letter-spacing: -.04em; }
+.stat span { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+/* ---------- Perjalanan (rel horizontal) ---------- */
+.rail-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; margin-bottom: 38px; flex-wrap: wrap; }
+.big-title { font-family: var(--serif); font-weight: 300; font-size: clamp(44px, 7.5vw, 112px); line-height: 1; letter-spacing: -.04em; }
+.big-title em { color: var(--accent); }
+.ctrl { display: flex; gap: 12px; }
+.ctrl button { background: none; border: 1px solid var(--ink); color: var(--ink); padding: 11px 22px; font: 500 12px var(--sans); letter-spacing: .14em; text-transform: uppercase; cursor: pointer; transition: background .3s, color .3s; }
+.ctrl button:hover { background: var(--ink); color: var(--paper); }
+.rail {
+  display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px var(--edge) 30px; scroll-padding-inline: var(--edge);
+  scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch;
 }
-
-.logo span, .blue {
-  color: var(--blue);
+.rail::-webkit-scrollbar { display: none; }
+.rail.drag { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }
+.step {
+  flex: 0 0 min(400px, 82vw); scroll-snap-align: start; min-height: 470px; display: flex; flex-direction: column; justify-content: space-between;
+  background: var(--paper-2); border: 1px solid var(--line); padding: 30px; user-select: none; transition: border-color .3s;
 }
+.step:hover { border-color: var(--ink); }
+.year { font-family: var(--serif); font-weight: 300; font-size: 104px; line-height: 1; letter-spacing: -.05em; color: transparent; -webkit-text-stroke: 1px var(--ink); transition: color .3s; }
+.step:hover .year { color: var(--accent); -webkit-text-stroke-color: var(--accent); }
+.kind { font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+.step h3 { font-family: var(--serif); font-weight: 400; font-size: 26px; line-height: 1.22; letter-spacing: -.015em; margin: 8px 0 6px; }
+.step .date { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+.step p, .step li { font-size: 14.5px; color: var(--muted); }
+.step li { position: relative; padding: 3px 0 3px 18px; }
+.step li::before { content: ""; position: absolute; left: 0; top: 15px; width: 8px; height: 1px; background: var(--accent); }
+.rail-bar { height: 1px; background: var(--line); margin-top: 6px; }
+.rail-bar i { display: block; height: 3px; margin-top: -1px; width: 20%; background: var(--accent); transition: width .15s linear; }
 
-.nav-links {
-  display: flex;
-  gap: 23px;
-  flex-wrap: wrap;
-  font-size: 13px;
-  color: var(--muted);
+/* ---------- Proyek ---------- */
+.proj-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap; margin-bottom: 40px; }
+.big-title sup { font-family: var(--sans); font-size: 14px; letter-spacing: .1em; color: var(--accent); vertical-align: top; margin-left: 8px; font-weight: 500; }
+.filters { display: flex; gap: 26px; flex-wrap: wrap; }
+.filters button {
+  background: none; border: 0; padding: 4px 0; cursor: pointer; font: 500 12px var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--muted);
+  background-image: linear-gradient(var(--accent), var(--accent)); background-repeat: no-repeat; background-position: 0 100%; background-size: 0 1px; transition: color .3s, background-size .35s;
 }
+.filters button:hover { color: var(--paper); }
+.filters button.on { color: var(--paper); background-size: 100% 1px; }
+.project { display: grid; grid-template-columns: 70px 1.15fr 1fr; gap: 30px; padding: 38px 0; border-top: 1px solid var(--line); transition: opacity .4s; }
+.project:last-child { border-bottom: 1px solid var(--line); }
+.project .no { font-family: var(--serif); font-size: 16px; color: var(--muted); padding-top: 12px; transition: color .3s; }
+.project h3 { font-family: var(--serif); font-weight: 300; font-size: clamp(30px, 4vw, 54px); line-height: 1.08; letter-spacing: -.03em; transition: color .3s; }
+.project .meta { font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); font-weight: 600; display: block; margin-bottom: 10px; }
+.project .desc p { color: var(--muted); font-size: 15.5px; max-width: 480px; }
+.stack { margin-top: 14px; font-size: 13px; }
+.stack span + span::before { content: "/"; margin: 0 9px; color: var(--muted); }
+.go { display: inline-block; margin-top: 16px; font-size: 14px; font-weight: 500; background: linear-gradient(var(--accent), var(--accent)) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; transition: color .3s, background-size .4s; }
+.go:hover { color: var(--accent); background-size: 0 1px; background-position: 100% 100%; }
+.project.hide { display: none; }
+.project.pop { animation: rise .4s ease both; }
+.project:hover h3 { color: var(--accent); }
+.project:hover .no { color: var(--accent); }
+/* ---------- Keahlian ---------- */
+.skill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 80px; margin-top: 70px; }
+.skill { padding: 30px 0 34px; border-top: 1px solid var(--line); }
+.skill .idx { font-family: var(--serif); font-style: italic; color: var(--accent); font-size: 15px; }
+.skill h3 { font-family: var(--serif); font-weight: 400; font-size: 27px; line-height: 1.2; letter-spacing: -.015em; margin: 4px 0 18px; }
+.chips { display: flex; flex-wrap: wrap; gap: 9px; }
+.chips span { font-size: 13.5px; padding: 6px 15px; border: 1px solid var(--line); border-radius: 999px; transition: background .3s, color .3s, border-color .3s; }
+.chips span:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
-.nav-links a:hover {
-  color: var(--blue);
+/* ---------- Kontak ---------- */
+.contact { padding-bottom: 50px; }
+.contact .big-title { font-size: clamp(54px, 11vw, 168px); }
+.contact-intro { color: var(--muted); font-size: 18px; max-width: 520px; margin: 34px 0 40px; }
+.mail { display: inline-block; font-family: var(--serif); font-weight: 300; font-size: clamp(26px, 4.4vw, 62px); letter-spacing: -.03em; line-height: 1.2; overflow-wrap: anywhere; background: linear-gradient(var(--accent), var(--accent)) 0 100% / 100% 1px no-repeat; padding-bottom: 6px; transition: color .3s, background-size .5s; }
+.mail:hover { color: var(--accent); background-size: 0 1px; background-position: 100% 100%; }
+.links { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 70px; border-top: 1px solid var(--line); }
+.links a { padding: 22px 20px 8px 0; }
+.links a + a { padding-left: 24px; border-left: 1px solid var(--line); }
+.links small { display: block; font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.links b { font-family: var(--serif); font-weight: 300; font-size: 24px; letter-spacing: -.01em; transition: color .3s; overflow-wrap: anywhere; }
+.links a:hover b { color: var(--accent); }
+footer { padding: 26px 0 34px; font-size: 13px; background: var(--ink); color: #a8a397; }
+footer .wrap { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; border-top: 1px solid #3a3832; padding-top: 24px; }
+footer a:hover { color: #fff; }
+
+/* ---------- Responsif ---------- */
+@media (max-width: 960px) {
+  .hero .wrap { grid-template-columns: 1fr; row-gap: 44px; }
+  .portrait { width: min(320px, calc(100% - 14px)); }
+  .top nav a, .clock { display: none; }
+  .menu-btn { display: block; }
+  section { padding: 84px 0; }
+  .about-grid { grid-template-columns: 1fr; gap: 50px; margin-top: 56px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .stat:nth-child(3) { padding-left: 0; border-left: 0; }
+  .stat:nth-child(n+3) { margin-top: 30px; border-top: 1px solid var(--line); }
+  .project { grid-template-columns: 1fr; gap: 14px; padding: 30px 0; }
+  .project .no { padding-top: 0; }
+  .skill-grid { grid-template-columns: 1fr; margin-top: 50px; }
+  .hero-bottom { flex-direction: column; align-items: flex-start; }
+  .links { grid-template-columns: 1fr; }
+  .links a + a { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
 }
-
-.hero {
-  min-height: 620px;
-  display: flex;
-  align-items: center;
-  padding: 85px 0;
+@media (max-width: 560px) {
+  .info div { grid-template-columns: 1fr; gap: 0; }
+  .year { font-size: 84px; }
+  .step { min-height: 440px; padding: 24px; }
 }
-
-.hero-content {
-  max-width: 850px;
-}
-
-.eyebrow {
-  color: var(--blue);
-  font-size: 13px;
-  font-weight: bold;
-  letter-spacing: 2px;
-  margin-bottom: 18px;
-}
-
-.hero h1 {
-  font-size: clamp(38px, 7vw, 68px);
-  line-height: 1.15;
-  margin-bottom: 20px;
-}
-
-.hero h2 {
-  font-size: clamp(18px, 3vw, 25px);
-  color: #a9bdd8;
-  font-weight: 500;
-}
-
-.hero p {
-  max-width: 700px;
-  color: var(--muted);
-  margin: 22px 0 30px;
-}
-
-.buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.btn {
-  display: inline-block;
-  padding: 12px 22px;
-  border-radius: 8px;
-  background: #2563eb;
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-  transition: .25s;
-}
-
-.btn:hover {
-  background: #1d4ed8;
-  transform: translateY(-3px);
-}
-
-.btn-outline {
-  background: transparent;
-  border: 1px solid var(--border);
-}
-
-.btn-outline:hover {
-  background: var(--surface);
-}
-
-section {
-  padding: 85px 0;
-  border-top: 1px solid var(--border);
-}
-
-.section-label {
-  color: var(--blue);
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing: 2px;
-}
-
-.section-title {
-  font-size: 32px;
-  margin: 8px 0 30px;
-}
-
-.about-grid {
-  display: grid;
-  grid-template-columns: 1.3fr .7fr;
-  gap: 35px;
-}
-
-.description {
-  color: var(--muted);
-}
-
-.info-box {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 24px;
-  border-radius: 12px;
-}
-
-.info-box p {
-  margin: 10px 0;
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.info-box strong {
-  color: white;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 13px;
-  padding: 25px;
-  transition: .25s;
-}
-
-.card:hover {
-  border-color: var(--blue);
-  transform: translateY(-4px);
-}
-
-.card h3 {
-  color: white;
-  font-size: 19px;
-  margin-bottom: 7px;
-}
-
-.card p {
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.card small {
-  color: var(--blue);
-  display: block;
-  margin-bottom: 12px;
-  font-weight: bold;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 17px;
-}
-
-.tag {
-  background: var(--surface2);
-  color: #a9cdfa;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  padding: 4px 10px;
-  font-size: 12px;
-}
-
-.timeline {
-  border-left: 2px solid #315c94;
-  margin-left: 8px;
-  padding-left: 25px;
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 30px;
-}
-
-.timeline-item::before {
-  content: "";
-  position: absolute;
-  left: -33px;
-  top: 8px;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: var(--blue);
-  border: 3px solid var(--bg);
-}
-
-.timeline-item h3 {
-  font-size: 18px;
-}
-
-.timeline-item .date {
-  color: var(--blue);
-  font-size: 13px;
-  margin: 3px 0 8px;
-}
-
-.timeline-item p,
-.timeline-item li {
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.timeline-item ul {
-  padding-left: 20px;
-}
-
-.skill-group {
-  margin-bottom: 25px;
-}
-
-.skill-group h3 {
-  margin-bottom: 13px;
-  font-size: 17px;
-}
-
-.project-link {
-  display: inline-block;
-  color: var(--blue);
-  margin-top: 17px;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.project-link:hover {
-  text-decoration: underline;
-}
-
-.contact-box {
-  background: linear-gradient(135deg, #142b4b, #101b2e);
-  border: 1px solid #31517a;
-  border-radius: 15px;
-  padding: 35px;
-}
-
-.contact-box p {
-  color: var(--muted);
-  margin: 10px 0 22px;
-}
-
-.contact-list {
-  display: grid;
-  gap: 14px;
-  margin-top: 22px;
-}
-
-.contact-list a {
-  color: #bfdbfe;
-  overflow-wrap: anywhere;
-}
-
-.contact-list a:hover {
-  color: white;
-}
-
-footer {
-  padding: 25px 0;
-  border-top: 1px solid var(--border);
-  text-align: center;
-  color: #71839e;
-  font-size: 13px;
-}
-
-.back-top {
-  position: fixed;
-  bottom: 22px;
-  right: 22px;
-  background: #2563eb;
-  color: white;
-  padding: 11px 15px;
-  border-radius: 9px;
-  font-size: 18px;
-}
-
-@media(max-width: 750px) {
-  .nav-content {
-    flex-direction: column;
-    padding: 15px 0;
-  }
-
-  .nav-links {
-    justify-content: center;
-    gap: 12px;
-  }
-
-  .hero {
-    min-height: 500px;
-  }
-
-  .about-grid,
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  section {
-    padding: 65px 0;
-  }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .mask > span { transform: none; }
+  .fade, .js .reveal { opacity: 1; transform: none; }
+  .statement .w { opacity: 1; }
 }
 </style>
 </head>
 
 <body>
 
-<nav>
-  <div class="container nav-content">
-    <div class="logo">DAFFA<span>.</span></div>
-    <div class="nav-links">
-      <a href="#beranda">Beranda</a>
-      <a href="#tentang">Tentang</a>
-      <a href="#pendidikan">Pendidikan</a>
-      <a href="#pengalaman">Pengalaman</a>
-      <a href="#proyek">Proyek</a>
-      <a href="#keahlian">Keahlian</a>
-      <a href="#kontak">Kontak</a>
-    </div>
-  </div>
-</nav>
-
-<header class="container hero" id="beranda">
-  <div class="hero-content">
-    <div class="eyebrow">PORTOFOLIO PRIBADI</div>
-    <h1>Tubagus Daffa<br><span class="blue">Nabil Dhaifullah</span></h1>
-    <h2>Sarjana Komputer | Pengembangan Web & Teknologi</h2>
-    <p>
-      Lulusan S1 bidang komputer dengan IPK 3,63 dari
-      Universitas Muhammadiyah Bandung. Memiliki pengalaman
-      magang, pengembangan aplikasi berbasis web dan mobile,
-      serta ketertarikan pada teknologi dan solusi digital.
-    </p>
-    <div class="buttons">
-      <a href="#proyek" class="btn">Jelajahi Proyek</a>
-      <a href="#kontak" class="btn btn-outline">Hubungi Saya</a>
-    </div>
-  </div>
+<header class="top">
+  <a href="#beranda" class="logo">Daffa.</a>
+  <nav aria-label="Navigasi utama">
+    <a href="#tentang">Tentang</a>
+    <a href="#perjalanan">Perjalanan</a>
+    <a href="#proyek">Proyek</a>
+    <a href="#keahlian">Keahlian</a>
+    <a href="#kontak">Kontak</a>
+    <span class="clock" id="clock">Bandung</span>
+  </nav>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="sheet">Menu</button>
 </header>
 
+<div class="sheet" id="sheet" aria-label="Menu">
+  <a href="#tentang"><i>01</i>Tentang</a>
+  <a href="#perjalanan"><i>02</i>Perjalanan</a>
+  <a href="#proyek"><i>03</i>Proyek</a>
+  <a href="#keahlian"><i>04</i>Keahlian</a>
+  <a href="#kontak"><i>05</i>Kontak</a>
+</div>
+
+<main>
+<!-- ================= HERO ================= -->
+<section class="hero" id="beranda">
+  <div class="wrap">
+    <div class="hero-text">
+    <div class="hero-tag fade" style="--d:.1s">Portofolio 2026</div>
+
+    <h1 class="name" id="heroName" aria-label="Tubagus Daffa Nabil Dhaifullah">
+      <span class="mask"><span class="l1" style="--d:.2s">Tubagus Daffa</span></span>
+      <span class="mask"><span class="l2" style="--d:.38s">Nabil Dhaifullah</span></span>
+    </h1>
+
+    <div class="hero-bottom fade" style="--d:.5s">
+      <p>
+        <strong>Sarjana Teknik Informatika</strong> lulusan Universitas Muhammadiyah Bandung dengan IPK 3,63.
+        Saya membangun aplikasi web, mobile, dan game, dan pernah magang di PT Bank Syariah Indonesia Tbk.
+      </p>
+    </div>
+    </div>
+
+    <figure class="portrait fade" style="--d:.45s">
+      <img src="foto.jpg" alt="Foto Tubagus Daffa Nabil Dhaifullah" width="800" height="1000" fetchpriority="high">
+    </figure>
+  </div>
+</section>
+
+<!-- ================= TENTANG ================= -->
 <section id="tentang">
-  <div class="container">
-    <div class="section-label">PERKENALAN</div>
-    <h2 class="section-title">Tentang Saya</h2>
+  <div class="wrap">
+    <div class="label reveal">01 &nbsp; Tentang</div>
+
+    <p class="statement" id="statement">
+      Lulusan Teknik Informatika yang senang mencoba hal baru untuk menghadirkan aplikasi yang <em>tertata, bermanfaat,</em> dan nyaman digunakan.
+    </p>
 
     <div class="about-grid">
-      <div class="description">
-        <p>
-          Saya Tubagus Daffa Nabil Dhaifullah, S.Kom.,
-          lulusan S1 bidang komputer dari Universitas
+      <div>
+        <p class="reveal">
+          Saya <strong>Tubagus Daffa Nabil Dhaifullah, S.Kom.</strong>, lulusan S1 Teknik Informatika dari Universitas
           Muhammadiyah Bandung dengan IPK 3,63.
         </p>
-        <br>
-        <p>
-          Saya memiliki pengalaman dalam pengembangan
-          website dan aplikasi mobile, termasuk pengalaman
-          magang selama tiga bulan di PT Bank Syariah
-          Indonesia Tbk. Saya pernah terlibat dalam
-          pengembangan sistem berbasis PHP untuk membantu
-          proses pekerjaan administrasi.
+        <p class="reveal">
+          Saya berpengalaman mengembangkan website dan aplikasi mobile, termasuk magang selama tiga bulan
+          di PT Bank Syariah Indonesia Tbk, tempat saya terlibat dalam pengembangan sistem berbasis PHP
+          untuk membantu pekerjaan administrasi.
         </p>
-        <br>
-        <p>
-          Saya merupakan pribadi yang cepat belajar,
-          mampu bekerja sama dalam tim, memiliki kemampuan
-          berpikir kritis, dan tertarik untuk terus
-          mengembangkan keterampilan di bidang teknologi.
+        <p class="reveal">
+          Saya cepat belajar, nyaman bekerja dalam tim, terbiasa berpikir kritis, dan selalu tertarik
+          mengembangkan keterampilan baru di bidang teknologi.
         </p>
       </div>
 
-      <div class="info-box">
-        <h3>Informasi Singkat</h3>
-        <p><strong>Nama:</strong><br>Tubagus Daffa Nabil Dhaifullah</p>
-        <p><strong>Pendidikan:</strong><br>S1 Bidang Komputer</p>
-        <p><strong>Universitas:</strong><br>Universitas Muhammadiyah Bandung</p>
-        <p><strong>IPK:</strong><br>3,63</p>
-        <p><strong>Domisili:</strong><br>Baleendah, Kabupaten Bandung</p>
+      <div class="info reveal" style="--d:.1s">
+        <div><small>Nama</small><b>Tubagus Daffa Nabil Dhaifullah</b></div>
+        <div><small>Pendidikan</small><b>S1 Teknik Informatika</b></div>
+        <div><small>Universitas</small><b>Universitas Muhammadiyah Bandung</b></div>
+        <div><small>IPK</small><b>3,63</b></div>
+        <div><small>Domisili</small><b>Baleendah, Kabupaten Bandung</b></div>
       </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat reveal"><b data-count="3.63" data-dec="2">0</b><span>IPK</span></div>
+      <div class="stat reveal" style="--d:.08s"><b data-count="6">0</b><span>Proyek</span></div>
+      <div class="stat reveal" style="--d:.16s"><b data-count="3">0</b><span>Bulan magang</span></div>
+      <div class="stat reveal" style="--d:.24s"><b data-count="4">0</b><span>Tahun kuliah</span></div>
     </div>
   </div>
 </section>
 
-<section id="pendidikan">
-  <div class="container">
-    <div class="section-label">LATAR BELAKANG</div>
-    <h2 class="section-title">Pendidikan</h2>
-
-    <div class="timeline">
-      <div class="timeline-item">
-        <h3>Universitas Muhammadiyah Bandung</h3>
-        <div class="date">2022 – 2026</div>
-        <p>Program Studi Ilmu Komputer, Fakultas Sains dan Teknologi.</p>
-        <p><strong>IPK: 3,63</strong></p>
+<!-- ================= PERJALANAN ================= -->
+<section id="perjalanan" style="padding-left:0;padding-right:0">
+  <div class="wrap">
+    <div class="label reveal">02 &nbsp; Perjalanan</div>
+    <div class="rail-head reveal">
+      <h2 class="big-title">Pendidikan, <em>magang</em><br>dan organisasi</h2>
+      <div class="ctrl">
+        <button id="prev" aria-label="Sebelumnya">Sebelumnya</button>
+        <button id="next" aria-label="Berikutnya">Berikutnya</button>
       </div>
+    </div>
+  </div>
 
-      <div class="timeline-item">
+  <div class="rail reveal" id="rail" tabindex="0" aria-label="Linimasa perjalanan, geser ke samping">
+    <article class="step">
+      <div class="year">2019</div>
+      <div>
+        <span class="kind">Pendidikan</span>
         <h3>SMK Prakarya Internasional</h3>
         <div class="date">2019 – 2022</div>
         <p>Teknik Komputer dan Jaringan (TKJ).</p>
       </div>
-    </div>
-  </div>
-</section>
+    </article>
 
-<section id="pengalaman">
-  <div class="container">
-    <div class="section-label">PENGALAMAN PROFESIONAL</div>
-    <h2 class="section-title">Pengalaman Magang</h2>
-
-    <div class="timeline">
-      <div class="timeline-item">
-        <h3>PT Bank Syariah Indonesia Tbk</h3>
-        <div class="date">22 September – 22 Desember 2025</div>
-        <p><strong>Peserta Magang — Tim HT-el (Hak Tanggungan Elektronik)</strong></p>
-        <br>
-        <ul>
-          <li>Bergabung dengan tim HT-el pada Financing Channel Bandung selama tiga bulan.</li>
-          <li>Mengembangkan sistem website Lampiran 13 menggunakan PHP untuk membantu pekerjaan operasional magang.</li>
-        </ul>
+    <article class="step">
+      <div class="year">2022</div>
+      <div>
+        <span class="kind">Pendidikan</span>
+        <h3>Universitas Muhammadiyah Bandung</h3>
+        <div class="date">2022 – 2026</div>
+        <p>S1 Teknik Informatika. IPK 3,63.</p>
       </div>
-    </div>
-  </div>
-</section>
+    </article>
 
-<section id="proyek">
-  <div class="container">
-    <div class="section-label">KARYA DAN PENGEMBANGAN</div>
-    <h2 class="section-title">Proyek Saya</h2>
-
-    <div class="grid">
-
-      <div class="card">
-        <small>PROYEK TUGAS AKHIR</small>
-        <h3>Game Edukasi Pengenalan Angka</h3>
-        <p>
-          Game edukasi 2D untuk membantu pengguna
-          mengenal angka dan mempelajari konsep
-          dasar berhitung.
-        </p>
-        <div class="tags">
-          <span class="tag">Godot Engine 4</span>
-          <span class="tag">GDScript</span>
-          <span class="tag">2D Game</span>
-        </div>
-        <a class="project-link"
-          href="https://github.com/tubagusdaffa/game-edukasi-pengenalan-angka"
-          target="_blank" rel="noopener noreferrer">
-          Lihat Repository ↗
-        </a>
-      </div>
-
-      <div class="card">
-        <small>PROYEK MAGANG · 2025</small>
-        <h3>Website Lampiran 13</h3>
-        <p>
-          Sistem berbasis web yang dikembangkan
-          untuk membantu proses pembuatan dokumen
-          Lampiran 13 secara otomatis di PT Bank
-          Syariah Indonesia.
-        </p>
-        <div class="tags">
-          <span class="tag">PHP</span>
-          <span class="tag">UI/UX</span>
-          <span class="tag">Backend</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <small>PROYEK · 2025</small>
-        <h3>HAMORA — Aplikasi Pengelolaan Film</h3>
-        <p>
-          Aplikasi mobile untuk memberikan rating
-          dan mengelola daftar film. Berperan sebagai
-          backend developer.
-        </p>
-        <div class="tags">
-          <span class="tag">Flutter</span>
-          <span class="tag">Dart</span>
-          <span class="tag">Node.js</span>
-          <span class="tag">MongoDB</span>
-          <span class="tag">Firebase</span>
-        </div>
-        <a class="project-link"
-          href="https://github.com/tubagusdaffa/Hamora"
-          target="_blank" rel="noopener noreferrer">
-          Lihat Repository ↗
-        </a>
-      </div>
-
-      <div class="card">
-        <small>PROYEK · 2025</small>
-        <h3>Library System Website</h3>
-        <p>
-          Sistem perpustakaan berbasis web dengan
-          fitur CRUD untuk data buku, anggota,
-          dan peminjaman buku.
-        </p>
-        <div class="tags">
-          <span class="tag">CodeIgniter</span>
-          <span class="tag">UI/UX</span>
-          <span class="tag">Backend</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <small>PROYEK · 2024</small>
-        <h3>HAHATIX — Aplikasi Pemesanan Tiket Film</h3>
-        <p>
-          Aplikasi mobile Android untuk pemesanan
-          tiket film. Berperan sebagai full stack
-          developer.
-        </p>
-        <div class="tags">
-          <span class="tag">Flutter</span>
-          <span class="tag">Dart</span>
-          <span class="tag">Firebase</span>
-        </div>
-        <a class="project-link"
-          href="https://github.com/tubagusdaffa/HAHATIX"
-          target="_blank" rel="noopener noreferrer">
-          Lihat Repository ↗
-        </a>
-      </div>
-
-      <div class="card">
-        <small>PROYEK · 2024</small>
-        <h3>E-Commerce Website</h3>
-        <p>
-          Website e-commerce yang memungkinkan
-          pengguna melakukan pemesanan kelompok
-          secara online dan bertransaksi dengan penjual.
-        </p>
-        <div class="tags">
-          <span class="tag">WordPress</span>
-          <span class="tag">UI/UX</span>
-          <span class="tag">Backend</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section id="keahlian">
-  <div class="container">
-    <div class="section-label">KOMPETENSI</div>
-    <h2 class="section-title">Keahlian</h2>
-
-    <div class="skill-group">
-      <h3>Pengembangan Web & Pemrograman</h3>
-      <div class="tags">
-        <span class="tag">HTML</span>
-        <span class="tag">CSS</span>
-        <span class="tag">JavaScript</span>
-        <span class="tag">PHP</span>
-        <span class="tag">Python (Data Analytics)</span>
-        <span class="tag">WordPress CMS</span>
-        <span class="tag">GDScript</span>
-        <span class="tag">Godot Engine</span>
-      </div>
-    </div>
-
-    <div class="skill-group">
-      <h3>Database & Pengolahan Data</h3>
-      <div class="tags">
-        <span class="tag">Database Administration</span>
-        <span class="tag">Database Management</span>
-        <span class="tag">Data Entry</span>
-        <span class="tag">Data Validation</span>
-        <span class="tag">Microsoft Excel</span>
-        <span class="tag">VLOOKUP</span>
-        <span class="tag">Pivot Table</span>
-      </div>
-    </div>
-
-    <div class="skill-group">
-      <h3>Administrasi & Pelaporan</h3>
-      <div class="tags">
-        <span class="tag">Financial Reporting</span>
-        <span class="tag">Invoice Generation</span>
-        <span class="tag">Microsoft Office</span>
-      </div>
-    </div>
-
-    <div class="skill-group">
-      <h3>Keterampilan Nonteknis</h3>
-      <div class="tags">
-        <span class="tag">Cepat Belajar</span>
-        <span class="tag">Komunikasi</span>
-        <span class="tag">Kepemimpinan Tim</span>
-        <span class="tag">Perencanaan Strategis</span>
-        <span class="tag">Manajemen Waktu</span>
-        <span class="tag">Berpikir Kritis</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="organisasi">
-  <div class="container">
-    <div class="section-label">AKTIVITAS KAMPUS</div>
-    <h2 class="section-title">Organisasi & Kegiatan</h2>
-
-    <div class="timeline">
-      <div class="timeline-item">
+    <article class="step">
+      <div class="year">2022</div>
+      <div>
+        <span class="kind">Organisasi</span>
         <h3>UKM Artside Sinematografi Deluxe</h3>
-        <div class="date">November 2022 – Sekarang</div>
+        <div class="date">November 2022 – sekarang</div>
         <p>Anggota. Mengembangkan minat dan pengalaman dalam proses produksi film.</p>
       </div>
+    </article>
 
-      <div class="timeline-item">
+    <article class="step">
+      <div class="year">2023</div>
+      <div>
+        <span class="kind">Organisasi</span>
         <h3>Panitia Artside Training (Diklat)</h3>
-        <div class="date">November 2023</div>
-        <p><strong>Divisi Publikasi dan Dokumentasi</strong></p>
+        <div class="date">November 2023 · Divisi Publikasi dan Dokumentasi</div>
         <ul>
           <li>Mendokumentasikan kegiatan melalui foto dan video.</li>
-          <li>Mengelola publikasi acara melalui desain poster dan konten media sosial.</li>
+          <li>Mengelola publikasi acara lewat desain poster dan konten media sosial.</li>
           <li>Menyusun laporan kegiatan dalam bentuk dokumentasi foto dan video.</li>
         </ul>
       </div>
+    </article>
+
+    <article class="step">
+      <div class="year">2025</div>
+      <div>
+        <span class="kind">Magang</span>
+        <h3>PT Bank Syariah Indonesia Tbk</h3>
+        <div class="date">22 September – 22 Desember 2025 · Tim HT-el (Hak Tanggungan Elektronik)</div>
+        <ul>
+          <li>Bergabung dengan tim HT-el pada Financing Channel Bandung selama tiga bulan.</li>
+          <li>Mengembangkan sistem website Lampiran 13 dengan PHP untuk membantu pekerjaan operasional magang.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+  <div class="wrap"><div class="rail-bar"><i id="railBar"></i></div></div>
+</section>
+
+<!-- ================= PROYEK ================= -->
+<section id="proyek" class="dark">
+  <div class="wrap">
+    <div class="label reveal">03 &nbsp; Proyek</div>
+    <div class="proj-head reveal">
+      <h2 class="big-title">Proyek <em>pilihan</em><sup>(06)</sup></h2>
+      <div class="filters" id="filters">
+        <button class="on" data-f="all">Semua</button>
+        <button data-f="web">Web</button>
+        <button data-f="mobile">Mobile</button>
+        <button data-f="game">Game</button>
+      </div>
+    </div>
+
+    <div class="projects" id="projects">
+
+      <article class="project reveal" data-cat="game" data-tint="#d8c7a8" data-n="01" data-stack="Godot Engine 4 / GDScript / 2D Game" data-name="Game Edukasi Pengenalan Angka">
+        <div class="no">01</div>
+        <div><span class="meta">Tugas Akhir</span><h3>Game Edukasi Pengenalan Angka</h3></div>
+        <div class="desc">
+          <p>Game edukasi 2D untuk membantu pengguna mengenal angka dan mempelajari konsep dasar berhitung.</p>
+          <div class="stack"><span>Godot Engine 4</span><span>GDScript</span><span>2D Game</span></div>
+          <a class="go" href="https://github.com/tubagusdaffa/game-edukasi-pengenalan-angka" target="_blank" rel="noopener noreferrer">Lihat repository</a>
+        </div>
+      </article>
+
+      <article class="project reveal" data-cat="web" data-tint="#a9b59a" data-n="02" data-stack="PHP / UI/UX / Backend" data-name="Website Lampiran 13">
+        <div class="no">02</div>
+        <div><span class="meta">Magang, 2025</span><h3>Website Lampiran 13</h3></div>
+        <div class="desc">
+          <p>Sistem berbasis web untuk membantu pembuatan dokumen Lampiran 13 secara otomatis di PT Bank Syariah Indonesia.</p>
+          <div class="stack"><span>PHP</span><span>UI/UX</span><span>Backend</span></div>
+        </div>
+      </article>
+
+      <article class="project reveal" data-cat="mobile" data-tint="#c98f78" data-n="03" data-stack="Flutter / Dart / Node.js / MongoDB / Firebase" data-name="HAMORA">
+        <div class="no">03</div>
+        <div><span class="meta">Proyek, 2025</span><h3>HAMORA, Aplikasi Pengelolaan Film</h3></div>
+        <div class="desc">
+          <p>Aplikasi mobile untuk memberi rating dan mengelola daftar film. Saya berperan sebagai backend developer.</p>
+          <div class="stack"><span>Flutter</span><span>Dart</span><span>Node.js</span><span>MongoDB</span><span>Firebase</span></div>
+          <a class="go" href="https://github.com/tubagusdaffa/Hamora" target="_blank" rel="noopener noreferrer">Lihat repository</a>
+        </div>
+      </article>
+
+      <article class="project reveal" data-cat="web" data-tint="#9aa7b5" data-n="04" data-stack="CodeIgniter / UI/UX / Backend" data-name="Library System Website">
+        <div class="no">04</div>
+        <div><span class="meta">Proyek, 2025</span><h3>Library System Website</h3></div>
+        <div class="desc">
+          <p>Sistem perpustakaan berbasis web dengan fitur CRUD untuk data buku, anggota, dan peminjaman buku.</p>
+          <div class="stack"><span>CodeIgniter</span><span>UI/UX</span><span>Backend</span></div>
+        </div>
+      </article>
+
+      <article class="project reveal" data-cat="mobile" data-tint="#b9a2a8" data-n="05" data-stack="Flutter / Dart / Firebase" data-name="HAHATIX">
+        <div class="no">05</div>
+        <div><span class="meta">Proyek, 2024</span><h3>HAHATIX, Pemesanan Tiket Film</h3></div>
+        <div class="desc">
+          <p>Aplikasi mobile Android untuk memesan tiket film. Saya berperan sebagai full stack developer.</p>
+          <div class="stack"><span>Flutter</span><span>Dart</span><span>Firebase</span></div>
+          <a class="go" href="https://github.com/tubagusdaffa/HAHATIX" target="_blank" rel="noopener noreferrer">Lihat repository</a>
+        </div>
+      </article>
+
+      <article class="project reveal" data-cat="web" data-tint="#cfae6b" data-n="06" data-stack="WordPress / UI/UX / Backend" data-name="E-Commerce Website">
+        <div class="no">06</div>
+        <div><span class="meta">Proyek, 2024</span><h3>E-Commerce Website</h3></div>
+        <div class="desc">
+          <p>Website e-commerce yang memungkinkan pengguna melakukan pemesanan kelompok secara online dan bertransaksi dengan penjual.</p>
+          <div class="stack"><span>WordPress</span><span>UI/UX</span><span>Backend</span></div>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
 
-<section id="kontak">
-  <div class="container">
-    <div class="section-label">HUBUNGI SAYA</div>
-    <h2 class="section-title">Mari Terhubung</h2>
 
-    <div class="contact-box">
-      <h3>Terbuka untuk kesempatan baru!</h3>
-      <p>
-        Saya tertarik untuk mengembangkan pengalaman,
-        mempelajari hal baru, dan berkontribusi dalam
-        lingkungan kerja profesional.
-      </p>
+<!-- ================= KEAHLIAN ================= -->
+<section id="keahlian">
+  <div class="wrap">
+    <div class="label reveal">04 &nbsp; Keahlian</div>
+    <h2 class="big-title reveal">Hal yang saya <em>kuasai</em></h2>
+  </div>
 
-      <div class="contact-list">
-        <a href="mailto:tubagusdaffa698@gmail.com">
-          ✉ Email: tubagusdaffa698@gmail.com
-        </a>
-
-        <a href="https://wa.me/6289531417192"
-           target="_blank" rel="noopener noreferrer">
-          ☎ WhatsApp: 089531417192
-        </a>
-
-        <a href="https://www.linkedin.com/in/tubagus-daffa-19a248310/"
-           target="_blank" rel="noopener noreferrer">
-          ↗ LinkedIn: Profil LinkedIn
-        </a>
-
-        <a href="https://github.com/tubagusdaffa"
-           target="_blank" rel="noopener noreferrer">
-          ↗ GitHub: tubagusdaffa
-        </a>
+  <div class="wrap">
+    <div class="skill-grid">
+      <div class="skill reveal">
+        <span class="idx">i.</span>
+        <h3>Pengembangan Web dan Pemrograman</h3>
+        <div class="chips"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>PHP</span><span>Python (Data Analytics)</span><span>WordPress CMS</span><span>GDScript</span><span>Godot Engine</span></div>
+      </div>
+      <div class="skill reveal" style="--d:.08s">
+        <span class="idx">ii.</span>
+        <h3>Database dan Pengolahan Data</h3>
+        <div class="chips"><span>Database Administration</span><span>Database Management</span><span>Data Entry</span><span>Data Validation</span><span>Microsoft Excel</span><span>VLOOKUP</span><span>Pivot Table</span></div>
+      </div>
+      <div class="skill reveal">
+        <span class="idx">iii.</span>
+        <h3>Administrasi dan Pelaporan</h3>
+        <div class="chips"><span>Financial Reporting</span><span>Invoice Generation</span><span>Microsoft Office</span></div>
+      </div>
+      <div class="skill reveal" style="--d:.08s">
+        <span class="idx">iv.</span>
+        <h3>Keterampilan Nonteknis</h3>
+        <div class="chips"><span>Cepat Belajar</span><span>Komunikasi</span><span>Kepemimpinan Tim</span><span>Perencanaan Strategis</span><span>Manajemen Waktu</span><span>Berpikir Kritis</span></div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ================= KONTAK ================= -->
+<section id="kontak" class="dark contact">
+  <div class="wrap">
+    <div class="label reveal">05 &nbsp; Kontak</div>
+    <h2 class="big-title reveal">Mari<br><em>terhubung.</em></h2>
+    <p class="contact-intro reveal">
+      Saya terbuka untuk kesempatan baru: mengembangkan pengalaman, belajar hal baru, dan berkontribusi di lingkungan kerja profesional.
+    </p>
+    <a class="mail reveal" href="mailto:tubagusdaffa698@gmail.com">tubagusdaffa698@gmail.com</a>
+
+    <div class="links reveal">
+      <a href="https://wa.me/6289531417192" target="_blank" rel="noopener noreferrer"><small>WhatsApp</small><b>089531417192</b></a>
+      <a href="https://www.linkedin.com/in/tubagus-daffa-19a248310/" target="_blank" rel="noopener noreferrer"><small>LinkedIn</small><b>Profil LinkedIn</b></a>
+      <a href="https://github.com/tubagusdaffa" target="_blank" rel="noopener noreferrer"><small>GitHub</small><b>tubagusdaffa</b></a>
+    </div>
+  </div>
+</section>
+</main>
+
 <footer>
-  <div class="container">
-    © 2026 Tubagus Daffa Nabil Dhaifullah, S.Kom. |
-    Dibuat dengan semangat belajar dan berkarya.
+  <div class="wrap">
+    <span>&copy; 2026 Tubagus Daffa Nabil Dhaifullah, S.Kom. Dibuat dengan semangat belajar dan berkarya.</span>
+    <a href="#beranda">Kembali ke atas</a>
   </div>
 </footer>
 
-<a href="#beranda" class="back-top" aria-label="Kembali ke atas">↑</a>
+<script>
+document.documentElement.classList.add('js');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
+/* Muncul halus saat di-scroll */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+$$('.reveal').forEach(el => io.observe(el));
+
+/* Angka statistik (langsung tampil) */
+$$('[data-count]').forEach(el => {
+  el.textContent = parseFloat(el.dataset.count).toFixed(+(el.dataset.dec || 0)).replace('.', ',');
+});
+
+/* Jam Bandung */
+(function () {
+  const el = $('#clock');
+  function tick() {
+    const t = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Jakarta' }).replace(':', '.');
+    el.textContent = 'Bandung ' + t + ' WIB';
+  }
+  tick(); setInterval(tick, 30000);
+})();
+
+/* Menu mobile */
+const sheet = $('#sheet'), menuBtn = $('#menuBtn');
+function setMenu(open) {
+  sheet.classList.toggle('open', open);
+  menuBtn.textContent = open ? 'Tutup' : 'Menu';
+  menuBtn.setAttribute('aria-expanded', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+menuBtn.addEventListener('click', () => setMenu(!sheet.classList.contains('open')));
+$$('a', sheet).forEach(a => a.addEventListener('click', () => setMenu(false)));
+
+/* Rel perjalanan: geser, tombol, tarik dengan mouse */
+const rail = $('#rail'), railBar = $('#railBar');
+function railProgress() {
+  const max = rail.scrollWidth - rail.clientWidth;
+  const frac = max > 0 ? rail.scrollLeft / max : 0;
+  const w = rail.clientWidth / rail.scrollWidth;
+  railBar.style.width = (w * 100 + (100 - w * 100) * frac) + '%';
+}
+rail.addEventListener('scroll', railProgress, { passive: true });
+railProgress();
+const stepW = () => $('.step', rail).offsetWidth + 20;
+$('#prev').addEventListener('click', () => rail.scrollBy({ left: -stepW(), behavior: 'smooth' }));
+$('#next').addEventListener('click', () => rail.scrollBy({ left: stepW(), behavior: 'smooth' }));
+rail.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') { rail.scrollBy({ left: stepW(), behavior: 'smooth' }); e.preventDefault(); }
+  if (e.key === 'ArrowLeft') { rail.scrollBy({ left: -stepW(), behavior: 'smooth' }); e.preventDefault(); }
+});
+let down = false, sx = 0, sl = 0;
+rail.addEventListener('mousedown', e => { down = true; sx = e.pageX; sl = rail.scrollLeft; rail.classList.add('drag'); });
+addEventListener('mouseup', () => { if (!down) return; down = false; rail.classList.remove('drag'); });
+addEventListener('mousemove', e => { if (down) rail.scrollLeft = sl - (e.pageX - sx); });
+
+/* Filter proyek */
+const btns = $$('#filters button'), items = $$('.project');
+btns.forEach(b => b.addEventListener('click', () => {
+  btns.forEach(x => x.classList.remove('on')); b.classList.add('on');
+  const f = b.dataset.f; let n = 0;
+  items.forEach(it => {
+    const show = f === 'all' || it.dataset.cat === f;
+    it.classList.toggle('hide', !show);
+    it.classList.remove('pop');
+    if (show) { it.classList.add('in'); it.style.animationDelay = (n++ * .04) + 's'; void it.offsetWidth; it.classList.add('pop'); }
+  });
+}));
+
+</script>
 </body>
 </html>
